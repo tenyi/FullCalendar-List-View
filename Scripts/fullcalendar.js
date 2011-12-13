@@ -2783,9 +2783,9 @@
     }
 
 
-    //Hack: TodoView
-    fcViews.agendaTodo = agendaTodoView;
-    function agendaTodoView(element, calendar, viewName) {
+    //Hack: ListView
+    fcViews.agendaList = agendaListView;
+    function agendaListView(element, calendar, viewName) {
         var t = this;
 
         function dayClick(ev) {
@@ -2818,7 +2818,7 @@
         }
 
         // imports
-        View.call(t, element, calendar, 'agendaTodo');
+        View.call(t, element, calendar, 'agendaList');
         var opt = t.opt;
 
         //var renderAgenda = t.renderAgenda;
@@ -2870,7 +2870,7 @@
 
             var sortedEvents = events.sort(sortEvent);
 
-            var x = "<table class='fc-todo-table'>"; // "<tr><th></th><th></th><th></th></tr>";
+            var x = "<table class='fc-list-table'>"; // "<tr><th></th><th></th><th></th></tr>";
             var total = sortedEvents.length;
             if (total > 0) {
                 var start = cloneDate(sortedEvents[0].start);
@@ -2879,16 +2879,16 @@
                 while (dateVar <= end) {
                     var arr = eventsOfThisDay(sortedEvents, dateVar);
                     if (arr.length > 0) {
-                        x += "<tr><td colspan='4' class='fc-todo-date'><span>";
+                        x += "<tr><td colspan='4' class='fc-list-date'><span>";
                         x += dateVar.toString(opt('titleFormat'));
                         x += "</span></td></tr>";
                         for (i in arr) {
-                            x += "<tr><td>&nbsp;</td><td class='fc-todo-time'>";
+                            x += "<tr><td>&nbsp;</td><td class='fc-list-time'>";
                             x += getListDateString(arr[i]);
                             x += "</td><td>&nbsp;</td>";
-                            x += "<td class='fc-todo-event'>";
-                            x += "<span id='todo" + arr[i].id;
-                            var classtemp = "' class='fc-todo-event " + arr[i].className + "'>";
+                            x += "<td class='fc-list-event'>";
+                            x += "<span id='list" + arr[i].id;
+                            var classtemp = "' class='fc-list-event " + arr[i].className + "'>";
                             x += classtemp.replace(",", " "); //Avoid className is array
                             x += arr[i].title;
                             x += "</span></td></tr>";
@@ -2899,7 +2899,7 @@
             }
             x += "<tr><td colspan='4'></td></tr></table>";
 
-            $('.fc-view-agendaTodo').html(x); //direct output XDDD
+            $('.fc-view-agendaList').html(x); //direct output XDDD
         }
 
         function rerenderEvents(modifiedEventId) {
@@ -2911,16 +2911,16 @@
     setDefaults({
         titleFormat: {
 
-            todo: 'yyyy/MMM/d dddd'
+            list: 'yyyy/MMM/d dddd'
         },
         columnFormat: {
-            todo: 'M/d dddd'
+            list: 'M/d dddd'
         },
         buttonText: {
-            todo: 'Todo'
+            list: 'List'
         }
     });
-    //Hack: TodoView end
+    //Hack: ListView end
 
     fcViews.agendaDay = AgendaDayView;
 
